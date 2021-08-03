@@ -52,9 +52,13 @@ class MainActivity : AppCompatActivity() {
     ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
 
+//        val locationPermissionGranted =
+//            requestCode == REQUEST_ACCESS_LOCATION_PERMISSIONS &&
+//                    grantResults[0] == PackageManager.PERMISSION_GRANTED //접근이 허용되었다.
         val locationPermissionGranted =
-            requestCode == REQUEST_ACCESS_LOCATION_PERMISSIONS &&
-                    grantResults[0] == PackageManager.PERMISSION_GRANTED //접근이 허용되었다.
+            ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED &&
+                    ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED
+
 
         if(!locationPermissionGranted) {
             finish()
@@ -79,12 +83,11 @@ class MainActivity : AppCompatActivity() {
 //            binding.textView.text = "${location.latitude}, ${location.longitude}"
             scope.launch {
                 val monitoringStation =
-                    Repository.getNearbyMonitoringStation(location.latitude, location.longitude)
+                    Repository.getNearbyMonitoringStation(location.longitude, location.latitude)
 
                 binding.textView.text = monitoringStation?.stationName
             }
         }
-
     }
 
     private fun initVariables() {

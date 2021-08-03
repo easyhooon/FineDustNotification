@@ -1,0 +1,2 @@
+rootProject.name = "FineDust"
+include ':app'

@@ -2,6 +2,7 @@ package kr.ac.konkuk.finedust.data
 
 import android.util.Log
 import kr.ac.konkuk.finedust.BuildConfig
+import kr.ac.konkuk.finedust.data.models.airquality.MeasuredValue
 import kr.ac.konkuk.finedust.data.models.monitoringstation.MonitoringStation
 import kr.ac.konkuk.finedust.data.services.AirKoreaApiService
 import kr.ac.konkuk.finedust.data.services.KakaoLocalApiService
@@ -43,6 +44,15 @@ object Repository {
                 //null 값을 후순위로 밀리게 하기 위해서
             ?.minByOrNull { it.tm ?: Double.MAX_VALUE  }
     }
+
+    suspend fun getLatestAirQualityData(stationName: String): MeasuredValue? =
+        airKoreaApiService
+            .getRealtimeAirQualities(stationName)
+            .body()
+            ?.response
+            ?.body
+            ?.measuredValues
+            ?.firstOrNull() //가장 최근에 측정된 데이터를 반환
 
     private val kakaoLocalApiService: KakaoLocalApiService by lazy {
         Retrofit.Builder()

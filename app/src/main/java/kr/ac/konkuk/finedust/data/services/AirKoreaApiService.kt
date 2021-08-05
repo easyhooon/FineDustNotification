@@ -1,6 +1,7 @@
 package kr.ac.konkuk.finedust.data.services
 
 import kr.ac.konkuk.finedust.BuildConfig
+import kr.ac.konkuk.finedust.data.models.airquality.AirQualityResponse
 import kr.ac.konkuk.finedust.data.models.monitoringstation.MonitoringStationsResponse
 import retrofit2.Response
 import retrofit2.http.GET
@@ -15,5 +16,14 @@ interface AirKoreaApiService {
     suspend fun getNearbyMonitoringStation(
         @Query("tmX") tmX: Double,
         @Query("tmY") tmY: Double
-    ): Response<MonitoringStationsResponse>
+    ): Response<MonitoringStationsResponse> //<-- return type
+
+    @GET("B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty" +
+        "?serviceKey=${BuildConfig.AIRKOREA_SERVICE_KEY}" +
+        "&returnType=json" +
+        "&dataTerm=DAILY" +
+        "&ver=1.3")
+    suspend fun getRealtimeAirQualities(
+        @Query("stationName") stationName: String
+    ):Response<AirQualityResponse>
 }

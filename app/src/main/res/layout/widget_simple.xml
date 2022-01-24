@@ -42,3 +42,5 @@
         tools:visibility="visible" />
 
 </LinearLayout>
+
+<!--remote view 는 constraintlayout 을 사용할 수 없음-->

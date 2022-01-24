@@ -11,7 +11,7 @@ interface AirKoreaApiService {
 
     //Open API 활용가이드 문서(에어코리아_측정소정보 조회 서비스_기술문서_v1.0.docx) 의 CallBack URL의  뒷자리 ㅇㅇ 앞쪽은 BaseURL
     @GET("B552584/MsrstnInfoInqireSvc/getNearbyMsrstnList" +
-            "?serviceKey=${BuildConfig.AIRKOREA_SERVICE_KEY}" +
+            "?serviceKey=${BuildConfig.AIR_KOREA_SERVICE_KEY}" +
             "&returnType=json")
     suspend fun getNearbyMonitoringStation(
         @Query("tmX") tmX: Double,
@@ -19,7 +19,7 @@ interface AirKoreaApiService {
     ): Response<MonitoringStationsResponse> //<-- return type
 
     @GET("B552584/ArpltnInforInqireSvc/getMsrstnAcctoRltmMesureDnsty" +
-        "?serviceKey=${BuildConfig.AIRKOREA_SERVICE_KEY}" +
+        "?serviceKey=${BuildConfig.AIR_KOREA_SERVICE_KEY}" +
         "&returnType=json" +
         "&dataTerm=DAILY" +
         "&ver=1.3")

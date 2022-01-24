@@ -67,7 +67,7 @@ object Repository {
 
     private val airKoreaApiService: AirKoreaApiService by lazy {
         Retrofit.Builder()
-            .baseUrl(Url.AIR_KOREA_BASE_URL)
+            .baseUrl(Url.AIR_KOREA_API_BASE_URL)
             //gson 으로 변환
             .addConverterFactory(GsonConverterFactory.create())
             //loggind 을 client 내부에서 추가
